@@ -10,5 +10,4 @@ def post_audit():
     result = AuditResult(content)
     db.session.add(result)
     db.session.commit()
-
-    return jsonify({"key": "value"})
+    return jsonify({})
