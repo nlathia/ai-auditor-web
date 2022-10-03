@@ -57,6 +57,6 @@ class AuditResult(db.Model):
         ]
         return sorted(
             rows,
-            key=lambda x: datetime.strptime(x.created, "%d %B %Y"),
+            key=lambda x: datetime.strptime(x.created, "%H:%M %d %B %Y"),
             reverse=True,
         )
