@@ -9,9 +9,11 @@ def get_index():
 
 def post_audit():
     content = request.get_json()
+    # Very lax
     if content.get("API_KEY") != os.environ["API_KEY"]:
         return jsonify({}), 401
-    
+    content.pop("API_KEY")
+
     result = AuditResult(content)
     db.session.add(result)
     db.session.commit()
