@@ -166,8 +166,9 @@
               <div class="terminal-alert terminal-alert-error">
                 {% set pred = "negative 😔" if mistake.prediction == 0 else "positive 😀" %}
                 {% set lab = "negative 😔" if mistake.label == 0 else "positive 😀" %}
-                <p>{{ mistake.text }}</p>
-                <p>Predicted: {{ pred }}<br />Labelled: {{ lab }}</p>
+                
+                <p><strong>Labelled</strong>: {{ lab }} | <strong>Predicted</strong>: {{ pred }}</p>
+                <p><strong>Text</strong>: {{ mistake.text }}</p>
               </div>
               {% endfor %}
 
