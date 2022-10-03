@@ -118,12 +118,11 @@
         <h2 id="Timeline">📈 Audit Timeline</h2>
       </header>
       <div class="terminal-timeline">
+        {% for row in rows %}
         <div class="terminal-card">
-          <header>30 September, 2022</header>
+          <header>{{ row.created }}</header>
           <div>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita, quas
-              ex vero enim in doloribus officiis ullam vel nam esse sapiente velit
-              incidunt. Eaque quod et, aut maiores excepturi sint.</p>
+            <p>The automated job ran successfully with {{ row.num_samples }} examples.</p>
 
             <header>
               <h2 id="Alerts">Metrics</h2>
@@ -132,97 +131,51 @@
               <tbody>
                 <tr>
                   <th>Accuracy</th>
-                  <td>98.9%</td>
+                  <td>{{ '%.2f' % row.accuracy }}</td>
                 </tr>
                 <tr>
-                  <th>Accuracy</th>
-                  <td>77%</td>
-                </tr>
-                <tr>
-                  <th>Recall</th>
-                  <td>89%</td>
-                </tr>
-              </tbody>
-            </table>
-
-
-
-            <section>
-              <header>
-                <h2 id="Alerts">Example mistakes</h2>
-              </header>
-              <div class="terminal-alert terminal-alert-primary">
-                <p>With a percentage showing above the arrow</p>
-                <div class="progress-bar progress-bar-show-percent">
-                  <div class="progress-bar-filled" style="width: 30%" data-filled="Predicted 30% negative"></div>
-                </div>
-              </div>
-              <div class="terminal-alert terminal-alert-error">
-                <p>With a percentage showing above the arrow</p>
-                <div class="progress-bar progress-bar-show-percent">
-                  <div class="progress-bar-filled" style="width: 60%" data-filled="Predicted 60% positive"></div>
-                </div>
-
-              </div>
-            </section>
-          </div>
-        </div>
-
-        <div class="terminal-card">
-          <header>10 October, 2022</header>
-          <div>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita, quas
-              ex vero enim in doloribus officiis ullam vel nam esse sapiente velit
-              incidunt. Eaque quod et, aut maiores excepturi sint.</p>
-
-            <header>
-              <h2 id="Alerts">Metrics</h2>
-            </header>
-            <table style="width: 50%">
-              <tbody>
-                <tr>
-                  <th>Accuracy</th>
-                  <td>98.9%</td>
-                </tr>
-                <tr>
-                  <th>Accuracy</th>
-                  <td>77%</td>
+                  <th>Precision</th>
+                  <td>{{ '%.2f' % row.precision }}</td>
                 </tr>
                 <tr>
                   <th>Recall</th>
-                  <td>89%</td>
+                  <td>{{ '%.2f' % row.recall }}</td>
+                </tr>
+                <tr>
+                  <th>F1</th>
+                  <td>{{ '%.2f' % row.f1 }}</td>
                 </tr>
               </tbody>
             </table>
 
             <section>
+              {% if row.mistakes|length > 0 %}
               <header>
                 <h2 id="Alerts">Example mistakes</h2>
               </header>
-              <div class="terminal-alert terminal-alert-primary">
-                <p>With a percentage showing above the arrow</p>
-                <div class="progress-bar progress-bar-show-percent">
-                  <div class="progress-bar-filled" style="width: 30%" data-filled="Predicted 30% positive"></div>
-                </div>
-              </div>
-              <div class="terminal-alert terminal-alert-error">
-                <p>With a percentage showing above the arrow</p>
-                <div class="progress-bar progress-bar-show-percent">
-                  <div class="progress-bar-filled" style="width: 60%" data-filled="Predicted 60% negative"></div>
-                </div>
 
+              {% for mistake in row.mistakes %}
+              <div class="terminal-alert terminal-alert-error">
+                {% set pred = "negative 😔" if mistake.prediction == 0 else "positive 😀" %}
+                {% set lab = "negative 😔" if mistake.label == 0 else "positive 😀" %}
+                <p>{{ mistake.text }}</p>
+                <p>Predicted: {{ pred }}<br />Labelled: {{ lab }}</p>
               </div>
+              {% endfor %}
+
+              {% endif %}
             </section>
           </div>
         </div>
-      </div>
-      <br />
+        {% endfor %}
+
+        <br />
     </section>
 
     <hr />
     <p>With ❤️ by <a href="https://nlathia.github.io/about/">Neal L.</a></p>
-
   </div>
+
   <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
   <script async defer src="https://buttons.github.io/buttons.js"></script>
   <script>
@@ -232,7 +185,6 @@
       });
     });
   </script>
-
 </body>
 
 </html>
