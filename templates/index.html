@@ -122,29 +122,37 @@
         <div class="terminal-card">
           <header>{{ row.created }}</header>
           <div>
-            <p>The automated job ran successfully with {{ row.num_samples }} examples.</p>
+            <p>The automated job ran successfully with {{ row.num_samples }} test set examples in {{ '%.2f' % row.num_minutes }} minutes.</p>
 
             <header>
               <h2 id="Alerts">Metrics</h2>
             </header>
             <table style="width: 50%">
               <tbody>
+                {% if row.accuracy %}
                 <tr>
                   <th>Accuracy</th>
                   <td>{{ '%.2f' % row.accuracy }}</td>
                 </tr>
+                {% endif %}
+                {% if row.precision %}
                 <tr>
                   <th>Precision</th>
                   <td>{{ '%.2f' % row.precision }}</td>
                 </tr>
+                {% endif %}
+                {% if row.recall %}
                 <tr>
                   <th>Recall</th>
                   <td>{{ '%.2f' % row.recall }}</td>
                 </tr>
+                {% endif %}
+                {% if row.f1 %}
                 <tr>
                   <th>F1</th>
                   <td>{{ '%.2f' % row.f1 }}</td>
                 </tr>
+                {% endif %}
               </tbody>
             </table>
 
