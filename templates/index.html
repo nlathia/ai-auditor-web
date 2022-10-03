@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="msapplication-TileColor" content="#ffffff" />
+  <meta name="msapplication-TileImage" content="/favicon/ms-icon-144x144.png" />
+  <meta name="theme-color" content="#ffffff" />
+  <title>Terminal CSS</title>
+  <meta name="description" content="A modern and minimal CSS framework for terminal lovers." />
+  <link rel="stylesheet" href="https://terminalcss.xyz/css/normalize.css" />
+  <link rel="stylesheet" href="https://unpkg.com/terminal.css@0.7.2/dist/terminal.min.css" />
+
+  <style>
+    .components-grid {
+      display: grid;
+      grid-column-gap: 1.4em;
+      grid-template-columns: auto;
+      grid-template-rows: auto;
+    }
+
+    .image-grid {
+      display: grid;
+      grid-template-rows: auto;
+      display: grid;
+      grid-gap: 1em;
+      grid-template-rows: auto;
+      grid-template-columns: repeat(auto-fit,
+          minmax(calc(var(--page-width) / 12), 1fr));
+    }
+
+    @media only screen and (min-width: 70em) {
+      .components-grid {
+        grid-template-columns: 3fr 9fr;
+      }
+    }
+  </style>
+
+</head>
+
+<body class="terminal">
+  <div class="container">
+    <div class="terminal-nav">
+      <header class="terminal-logo">
+        <div class="logo terminal-prompt"><a href="https://terminalcss.xyz" class="no-style">Model Card for Google's
+            Sentiment Detection API</a></div>
+      </header>
+    </div>
+  </div>
+
+  <div class="container">
+
+    <h1 id="model-card">🔍 Auditing an artifical intelligence API with an open dataset</h1>
+    <p>This web page is a dynamic <a href="https://modelcards.withgoogle.com/about">model card</a> for Google's
+      sentiment detection API.
+    </p>
+
+    <p>Artifical Intelligence (AI) APIs rarely expose information about how the model(s) behind them perform. This is
+      because those models could be changed at any time, as companies re-train them or run experiments to seek to
+      improve their internal metrics.
+    </p>
+
+    <p>This proof-of-concept system uses an open source sentiment dataset to <em>regularly</em> audit the performance of
+      a closed AI API. It was submitted to the <a href="">AI Audit Challenge</a> in October 2022.
+    </p>
+
+    <hr />
+
+    <h2 id="intended-usage">✅ What is sentiment analysis?</h2>
+    <p>
+    <blockquote>
+      <p>
+        <em>Sentiment Analysis inspects the given text and identifies the prevailing emotional opinion within the text,
+          especially to determine a writer's attitude as positive, negative, or neutral.</em>
+      </p>
+      <footer>
+        <cite><a href="https://cloud.google.com/natural-language/docs/analyzing-sentiment">Google
+            Documentation</a></cite>
+      </footer>
+    </blockquote>
+    </p>
+
+    <h2 id="model-api">✅ How does the API score sentiment?</h2>
+    <p>
+    <blockquote>
+      <p>
+        <em>The score of a document's sentiment indicates the overall emotion of a document. The magnitude of a
+          document's sentiment indicates how much emotional content is present within the document, and this value is
+          often proportional to the length of the document.</em>
+      </p>
+      <footer>
+        <cite><a
+            href="https://cloud.google.com/natural-language/docs/basics#interpreting_sentiment_analysis_values">Google
+            Documentation</a></cite>
+      </footer>
+    </blockquote>
+
+    Note: the raw model(s) are not available for direct inspection; this prototype audits the performance of the API at
+    a
+    given point in time. As far as I can tell, the model(s) behind this API could be updated at any time.
+    </p>
+
+    <h2 id="open-dataset">🍅 Which dataset are we using to audit the API?</h2>
+    <p>The Rotten tomatoes dataset is <a href="https://huggingface.co/datasets/rotten_tomatoes">hosted on Hugging
+        Face</a>. This is a dataset of containing positive and negative processed sentences from Rotten
+      Tomatoes movie reviews. This data was first used in <a href="https://arxiv.org/abs/cs/0506075" a research
+        paper></a> by Pang and
+      Lee published in the Proceedings of the ACL, 2005.
+    </p>
+
+    <hr />
+
+    <section>
+      <header>
+        <h2 id="Timeline">📈 Audit Timeline</h2>
+      </header>
+      <div class="terminal-timeline">
+        <div class="terminal-card">
+          <header>30 September, 2022</header>
+          <div>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita, quas
+              ex vero enim in doloribus officiis ullam vel nam esse sapiente velit
+              incidunt. Eaque quod et, aut maiores excepturi sint.</p>
+
+            <header>
+              <h2 id="Alerts">Metrics</h2>
+            </header>
+            <table style="width: 50%">
+              <tbody>
+                <tr>
+                  <th>Accuracy</th>
+                  <td>98.9%</td>
+                </tr>
+                <tr>
+                  <th>Accuracy</th>
+                  <td>77%</td>
+                </tr>
+                <tr>
+                  <th>Recall</th>
+                  <td>89%</td>
+                </tr>
+              </tbody>
+            </table>
+
+
+
+            <section>
+              <header>
+                <h2 id="Alerts">Example mistakes</h2>
+              </header>
+              <div class="terminal-alert terminal-alert-primary">
+                <p>With a percentage showing above the arrow</p>
+                <div class="progress-bar progress-bar-show-percent">
+                  <div class="progress-bar-filled" style="width: 30%" data-filled="Predicted 30% negative"></div>
+                </div>
+              </div>
+              <div class="terminal-alert terminal-alert-error">
+                <p>With a percentage showing above the arrow</p>
+                <div class="progress-bar progress-bar-show-percent">
+                  <div class="progress-bar-filled" style="width: 60%" data-filled="Predicted 60% positive"></div>
+                </div>
+
+              </div>
+            </section>
+          </div>
+        </div>
+
+        <div class="terminal-card">
+          <header>10 October, 2022</header>
+          <div>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita, quas
+              ex vero enim in doloribus officiis ullam vel nam esse sapiente velit
+              incidunt. Eaque quod et, aut maiores excepturi sint.</p>
+
+            <header>
+              <h2 id="Alerts">Metrics</h2>
+            </header>
+            <table style="width: 50%">
+              <tbody>
+                <tr>
+                  <th>Accuracy</th>
+                  <td>98.9%</td>
+                </tr>
+                <tr>
+                  <th>Accuracy</th>
+                  <td>77%</td>
+                </tr>
+                <tr>
+                  <th>Recall</th>
+                  <td>89%</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <section>
+              <header>
+                <h2 id="Alerts">Example mistakes</h2>
+              </header>
+              <div class="terminal-alert terminal-alert-primary">
+                <p>With a percentage showing above the arrow</p>
+                <div class="progress-bar progress-bar-show-percent">
+                  <div class="progress-bar-filled" style="width: 30%" data-filled="Predicted 30% positive"></div>
+                </div>
+              </div>
+              <div class="terminal-alert terminal-alert-error">
+                <p>With a percentage showing above the arrow</p>
+                <div class="progress-bar progress-bar-show-percent">
+                  <div class="progress-bar-filled" style="width: 60%" data-filled="Predicted 60% negative"></div>
+                </div>
+
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
+      <br />
+    </section>
+
+    <hr />
+    <p>With ❤️ by <a href="https://nlathia.github.io/about/">Neal L.</a></p>
+
+  </div>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      document.querySelectorAll("pre code").forEach(block => {
+        window.hljs.highlightBlock(block);
+      });
+    });
+  </script>
+
+</body>
+
+</html>
