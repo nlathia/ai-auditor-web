@@ -9,7 +9,7 @@ def get_index():
 
 def post_audit():
     content = request.get_json()
-    if content["API_KEY"] != os.environ["API_KEY"]:
+    if content.get("API_KEY") != os.environ["API_KEY"]:
         return jsonify({}), 401
     
     result = AuditResult(content)
