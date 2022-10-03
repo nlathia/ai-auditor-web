@@ -1,4 +1,5 @@
 from typing import List
+from datetime import datetime
 import json
 
 from flask_sqlalchemy import SQLAlchemy
@@ -50,5 +51,12 @@ class AuditResult(db.Model):
 
     @classmethod
     def get_all(cls):
-        for row in db.session.query(cls).all():
-            yield Row.from_json(row.contents)
+        rows = [
+            Row.from_json(row.contents)
+            for row in db.session.query(cls).all()
+        ]
+        return sorted(
+            rows,
+            key=lambda x: datetime.strptime(x.created, "%d %B %Y"),
+            reverse=True,
+        )
