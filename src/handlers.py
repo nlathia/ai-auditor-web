@@ -1,3 +1,5 @@
+import os
+
 from flask import render_template, jsonify, request
 from src.data import db, AuditResult
 
@@ -7,7 +9,10 @@ def get_index():
 
 def post_audit():
     content = request.get_json()
+    if content["key"] != os.environ["API_KEY"]:
+        return jsonify({}), 401
+    
     result = AuditResult(content)
     db.session.add(result)
     db.session.commit()
-    return jsonify({})
+    return jsonify({}), 200
